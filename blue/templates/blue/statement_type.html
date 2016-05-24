@@ -1,0 +1,28 @@
+{# Load the tag library #}
+{% load bootstrap3 %}
+{% load i18n %}
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{# Display a form #}
+<h1>{% trans "Type of Statement" %}</h1>
+
+<form action="/blue/statement_type/create/" method="post" class="form">
+  {% csrf_token %}
+  {% bootstrap_form form %}
+  {% buttons %}
+    <button type="submit" class="btn btn-primary">
+      {% bootstrap_icon "star" %} Submit
+    </button>
+  {% endbuttons %}
+</form>
+
+<ul class="list-group">
+{% for st_type in st_types %}
+<li class="list-group-item">{{ st_type.description }}</li>
+{% endfor %}
+</ul>
