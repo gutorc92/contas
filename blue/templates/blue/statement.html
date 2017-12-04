@@ -1,19 +1,38 @@
+{% extends 'contas/base.html' %}
 {# Load the tag library #}
 {% load bootstrap3 %}
 {% load i18n %}
 {# Load CSS and JavaScript #}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
-
-{# Display django.contrib.messages as Bootstrap alerts #}
-{% bootstrap_messages %}
-
-{# Display a form #}
+{% load static %}
 <h1>{% trans "Statement" %}</h1>
 
+{% block content %}
 <form action="/blue/statement/create/" method="post" class="form">
   {% csrf_token %}
-  {% bootstrap_form form %}
+  {% for field in form %}
+	{% if field.name == 'date' %}
+		<div class="form-group">
+				{% bootstrap_label field.label %}
+			<div class='input-group date' id='datetimepicker1'>
+				{% bootstrap_field field show_label=false%}
+			<span class="input-group-addon">
+				<span class="glyphicon glyphicon-calendar"></span>
+			</span>
+			</div>
+		</div>
+		<script type="text/javascript">
+            $(function () {
+				alert("Teste");
+                $('#datetimepicker1').datetimepicker({
+					locale: 'pt-br',
+					pickTime: false
+				});
+            });
+        </script>
+	{% else %}
+		{% bootstrap_field field %}
+	{% endif %}
+  {% endfor %}
   {% buttons %}
     <button type="submit" class="btn btn-primary">
       {% bootstrap_icon "star" %} Submit
@@ -26,3 +45,4 @@
 <li class="list-group-item">{{ statement.description }}</li>
 {% endfor %}
 </ul>
+{% endblock %}
