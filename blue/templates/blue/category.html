@@ -1,28 +1,32 @@
+{% extends 'contas/base.html' %}
 {# Load the tag library #}
 {% load bootstrap3 %}
 {% load i18n %}
 {# Load CSS and JavaScript #}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
-
-{# Display django.contrib.messages as Bootstrap alerts #}
-{% bootstrap_messages %}
-
-{# Display a form #}
+{% load static %}
 <h1>{% trans "Category" %}</h1>
 
-<form action="/blue/category/create/" method="post" class="form">
-  {% csrf_token %}
-  {% bootstrap_form form %}
-  {% buttons %}
-    <button type="submit" class="btn btn-primary">
-      {% bootstrap_icon "star" %} Submit
-    </button>
-  {% endbuttons %}
-</form>
-
-<ul class="list-group">
-{% for category in categories %}
-<li class="list-group-item">{{ category.description }}</li>
-{% endfor %}
-</ul>
+{% block content %}
+    <div class="container">
+        <div class="row top-row">
+            <div class="col-xs-4">
+                <form action="/blue/category/create/" method="post" class="form">
+                  {% csrf_token %}
+                  {% bootstrap_form form %}
+                  {% buttons %}
+                    <button type="submit" class="btn btn-primary">
+                      {% bootstrap_icon "star" %} Submit
+                    </button>
+                  {% endbuttons %}
+                </form>
+            </div>
+            <div class="col-xs-4">
+                <ul class="list-group">
+                    {% for category in categories %}
+                    <li class="list-group-item">{{ category.description }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

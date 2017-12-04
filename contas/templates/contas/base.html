@@ -18,7 +18,7 @@
         <link rel="stylesheet" type="text/css" href="{% static "fonts/font-awesome/css/font-awesome.css" %}" >
 
         <!-- Stylesheet -->
-        <link rel="stylesheet" type="text/css"  href="{% static "css/style.css" %}" >
+        <link rel="stylesheet" type="text/css"  href="{% static "/css/style.css" %}" >
         <link rel="stylesheet" type="text/css"  href="{% static "css/base.css" %}" >
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -49,11 +49,12 @@
         <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>Despesa</a>
         <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-book fa-fw"></i>Receita</a>
         <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-book fa-fw"></i>Transações</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-book fa-fw"></i>Categorias</a>
      </div>
     </nav>
 
         </div>
-        <div id="content-wrapper" class="col-md-3 col-md-offset-4">
+        <div id="content-wrapper" class="col-md-3 col-md-offset-3">
             {% block content %}
                 {{ content }}
             {% endblock %}

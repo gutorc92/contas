@@ -129,8 +129,15 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 
-
+STATICFILES_DIRS = [os.path.join(PROJECT_ROOT, 'contas/static'),]
 
 DATE_INPUT_FORMATS = ("%d-%m-%y")
+
+
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
