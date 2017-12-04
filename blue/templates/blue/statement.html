@@ -7,7 +7,7 @@
 <h1>{% trans "Statement" %}</h1>
 
 {% block content %}
-<form action="/blue/statement/create/" method="post" class="form">
+<form action="/blue/statement/create/{{ id_type }}/" method="post" class="form">
   {% csrf_token %}
   {% for field in form %}
 	{% if field.name == 'date' %}
@@ -22,7 +22,6 @@
 		</div>
 		<script type="text/javascript">
             $(function () {
-				alert("Teste");
                 $('#datetimepicker1').datetimepicker({
 					locale: 'pt-br',
 					pickTime: false

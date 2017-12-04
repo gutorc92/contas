@@ -17,8 +17,8 @@ class Statement(models.Model):
     description = models.CharField(max_length=200)
     value = models.DecimalField(max_digits=20,decimal_places=2)
     date = models.DateField()   
-    categories = models.ManyToManyField(Category)
-    st_type = models.ForeignKey(StatementType,related_name="statements")
+    categories = models.ForeignKey(Category, on_delete=models.CASCADE)
+    st_type = models.ForeignKey(StatementType,related_name="statements", on_delete=models.CASCADE)
 
 
     

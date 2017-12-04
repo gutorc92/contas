@@ -1,0 +1,30 @@
+[
+  {
+    "model": "blue.category",
+    "pk": 1,
+    "fields": {
+      "description": "Aluguel"
+    }
+  },
+  {
+    "model": "blue.category",
+    "pk": 2,
+    "fields": {
+      "description": "Academia"
+    }
+  },
+  {
+    "model": "blue.StatementType",
+    "pk": 1,
+    "fields": {
+      "description": "Debit"
+    }
+  },
+  {
+    "model": "blue.StatementType",
+    "pk": 2,
+    "fields": {
+      "description": "Credit"
+    }
+  }
+]
