@@ -97,4 +97,4 @@ class BlueUser(AbstractBaseUser, PermissionsMixin):
 
 class Family(models.Model):
     name = models.CharField(max_length=100)
-    members = models.ManyToManyField(BlueUser)
+    members = models.ManyToManyField(BlueUser, related_name="family")

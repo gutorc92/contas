@@ -40,21 +40,22 @@ class LoginView(FormView):
         return redirect("logged")
 
     def get(self, request):
-        if not request.user.is_authenticated():
-            return super(LoginView, self).get(request)
-        else:
-            logout(self.request)
+        print(request)
+        if hasattr(request, 'user') and isinstance(request.user, get_user_model()):
             return redirect("index")
+        else:
+            return super(LoginView, self).get(request)
 
 
 class UserRegister(View):
 
     def get(self,request):
-        if not request.user.is_authenticated():
+        if hasattr(request, 'user') and isinstance(request.user, get_user_model()):
+            return redirect("index")
+        else:
             form = SigninForm()
             return render(request, 'users/register.html', {'form': form})
-        else:
-            return redirect("index")
+
 
     def post(self,request):
         form = SigninForm(request.POST)
@@ -62,7 +63,7 @@ class UserRegister(View):
            messages.success(request, u'Usuário criado com sucesso.')
            user = form.save()
            form = SigninForm()
-        return render(request, 'students/register.html', {'form': form})
+        return render(request, 'users/register.html', {'form': form})
 
 @method_decorator(required_to_be_admin, name="get")
 class UserListView(View):

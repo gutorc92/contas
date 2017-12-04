@@ -30,7 +30,7 @@ class StatementView(View):
 class CategoryCreate(CreateView):
     model = Category
     form_class = CategoryForm
-    template_name  = "category.html"
+    template_name  = "blue/category.html"
     #extra_context['categories'] = Category.objects.all()
 
 class CategoryUpdate(UpdateView):

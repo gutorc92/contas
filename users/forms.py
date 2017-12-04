@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import Group
 from django.core.validators import validate_integer, RegexValidator
+from .models import Family
 
 class LoginForm(forms.Form):
 
@@ -63,8 +64,19 @@ class SigninForm(forms.Form):
     def save(self, commit=True):
         user = get_user_model()() 
         cleaned_data = super(SigninForm, self).clean()
-        user.fisrt_name = cleaned_data.get("name")
+        names = cleaned_data.get("name").split()
+        user.fisrt_name = names[0]
+        del names[0]
+        user.last_name = " ".join(names)
         user.email = cleaned_data.get("email")
         user.set_password(cleaned_data.get("password"))
         user.save() 
+        family = self.create_family(names) 
+        user.family.add(family)
+        user.save() 
         
+    def create_family(self, names):
+        family = Family()
+        family.name = names[-1];
+        family.save()
+        return family

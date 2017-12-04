@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from users.models import Family
 # Create your models here.
 class Category(models.Model):
-    description = models.CharField(max_length=200,help_text='testando')
+    description = models.CharField(max_length=200)
     family = models.ForeignKey(Family, blank=True, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
