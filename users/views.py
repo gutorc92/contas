@@ -25,7 +25,7 @@ class MainView(View):
 class LoginView(FormView):
     template_name = "users/signin.html"
     form_class = LoginForm
-    success_url = "/cards/all"
+    success_url = "/"
 
     def form_valid(self, form):
         email, password = form.get_data()
@@ -51,9 +51,8 @@ class UserRegister(View):
 
     def get(self,request):
         if not request.user.is_authenticated():
-            print("Aqui")
             form = SigninForm()
-            return render(request, 'students/signin.html', {'form': form})
+            return render(request, 'users/register.html', {'form': form})
         else:
             return redirect("index")
 
@@ -63,7 +62,7 @@ class UserRegister(View):
            messages.success(request, u'Usuário criado com sucesso.')
            user = form.save()
            form = SigninForm()
-        return render(request, 'students/signin.html', {'form': form})
+        return render(request, 'students/register.html', {'form': form})
 
 @method_decorator(required_to_be_admin, name="get")
 class UserListView(View):

@@ -43,30 +43,58 @@
     </head>
     <body>
         <div id="menu">
+        {% if user.is_authenticated %}
             <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
-      <div class="w3-container w3-row">
-        <div class="w3-col s4">
-          <img src="" class="w3-circle w3-margin-right" style="width:50px">
-        </div>
-        <div class="w3-col s8 w3-bar">
-          <span>Bem Vindo, <strong></strong></span><br>
-          <a href="#" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i></a>
-          <a href="#" class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
-          <a href="#" class="w3-bar-item w3-button"><i class="fa fa-cog"></i></a>
-        </div>
-      </div>
-      <hr>
+              <div class="w3-container w3-row">
+                <div class="w3-col s4">
+                  <img src="" class="w3-circle w3-margin-right" style="width:50px">
+                </div>
+                <div class="w3-col s8 w3-bar">
+                  <span>Bem Vindo, <strong></strong></span><br>
+                  <a href="#" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i></a>
+                  <a href="#" class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
+                  <a href="#" class="w3-bar-item w3-button"><i class="fa fa-cog"></i></a>
+                </div>
+              </div>
+          <hr>
 
-      <div class="w3-bar-block">
-        <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-dashboard fa-fw"></i>  Dashboard</a>
-        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>Despesa</a>
-        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-book fa-fw"></i>Receita</a>
-        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-book fa-fw"></i>Transações</a>
-        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-book fa-fw"></i>Categorias</a>
-     </div>
-    </nav>
+              <div class="w3-bar-block">
+                <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+                <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-dashboard fa-fw"></i>  Dashboard</a>
+                <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>Despesa</a>
+                <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-book fa-fw"></i>Receita</a>
+                <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-book fa-fw"></i>Transações</a>
+                <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-book fa-fw"></i>Categorias</a>
+             </div>
+        </nav>
+        {% else %}
+            <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="#">Contas</a>
+                </div>
 
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav">
+                    <li><a href="#">Home <span class="sr-only">(current)</span></a></li>
+                 </ul>
+                  <ul class="nav navbar-nav navbar-right">
+                      <li><a href="{% url "signin" %}">Sign In</a></li>
+                      <li><a href="{% url "login" %}">Login</a></li>
+                  </ul>
+                </div><!-- /.navbar-collapse -->
+              </div><!-- /.container-fluid -->
+            </nav>
+                
+        {% endif %}
         </div>
         <div id="content-wrapper" class="col-md-3 col-md-offset-3">
             {% block content %}
