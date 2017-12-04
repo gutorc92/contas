@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'blue',
     'bootstrap3',
     'django_extensions',
+    'users',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -141,3 +142,5 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
+
+AUTH_USER_MODEL = 'users.BlueUser'

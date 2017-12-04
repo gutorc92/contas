@@ -1,0 +1,35 @@
+[
+  {
+    "model": "users.BrainUser",
+    "pk": 1,
+    "fields": {
+      "first_name": "Pedro",
+      "last_name": "Cavalcante",
+      "email": "pedro@gmail.com",
+      "password": "pbkdf2_sha256$36000$4a3GGwU251C6$EFJl6PCnvbJ9AERZDAkFt/f+xf/UskGPZY7DcGs5Thc=",
+      "groups": [1]
+    }
+  },
+  {
+    "model": "users.BrainUser",
+    "pk": 2,
+    "fields": {
+      "first_name": "Alberto",
+      "last_name": "Silva",
+      "email": "silva@gmail.com",
+      "password": "pbkdf2_sha256$36000$4a3GGwU251C6$EFJl6PCnvbJ9AERZDAkFt/f+xf/UskGPZY7DcGs5Thc=",
+      "groups": [2]
+    }
+  },
+  {
+    "model": "users.BrainUser",
+    "pk": 3,
+    "fields": {
+      "first_name": "Carlos",
+      "last_name": "Pereira",
+      "email": "carlos@gmail.com",
+      "password": "pbkdf2_sha256$36000$4a3GGwU251C6$EFJl6PCnvbJ9AERZDAkFt/f+xf/UskGPZY7DcGs5Thc=",
+      "groups": [3]
+    }
+  }
+]

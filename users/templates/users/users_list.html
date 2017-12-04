@@ -1,0 +1,46 @@
+{% extends 'brainstorm/base.html' %}
+
+{% load staticfiles bootstrap3 %}
+
+{% load users_handling %}
+
+{% block extrastyle %}
+ <link rel="stylesheet" type="text/css" href="{% static "styles/card.css" %}" >
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container" id="page-content">
+  <div class="format-content" style="clear: both">
+  {%if list_all %}
+    {% for user in list_all %}
+      <div class="card col-md-3 col-md-offset-4">
+        <h4  class="title"><a  href="">{{user.first_name}}</a></h4>
+        <h4  class="title"><a  href="">{{user.last_name}}</a></h4>
+        <hr class="m-y-2">
+        <p class="card-description">{{user.email}}</p>
+        {% if user|isstudent and user.is_active %}
+            <a class="btn btn-default btn-access pull-center" href="{% url 'changegroup_user' id_user=user.pk group_change_to='professor' %}">Tornar professor</a>
+            <a class="btn btn-default btn-access pull-center" href="{% url 'changegroup_user' id_user=user.pk group_change_to='admin' %}">Tornar admin</a>
+        {% elif user|isprofessor and user.is_active  %}
+            <a class="btn btn-default btn-access pull-center" href="{% url 'changegroup_user' id_user=user.pk group_change_to='student' %}">Tornar aluno</a>
+            <a class="btn btn-default btn-access pull-center" href="{% url 'changegroup_user' id_user=user.pk group_change_to='admin' %}">Tornar admin</a>
+        {% elif user|isadmin and user.is_active %}
+            <a class="btn btn-default btn-access pull-center" href="{% url 'changegroup_user' id_user=user.pk group_change_to='student' %}">Tornar aluno</a>
+            <a class="btn btn-default btn-access pull-center" href="{% url 'changegroup_user' id_user=user.pk group_change_to='professor' %}">Tornar professor</a>
+        {% endif %}
+        {% if user.is_active %}
+            <a class="btn btn-default btn-access pull-center" href="{% url 'delete_user' id_user=user.pk action='delete' %}">Excluir</a>
+        {% else %}
+            <a class="btn btn-default btn-access pull-center" href="{% url 'delete_user' id_user=user.pk action='reactive' %}">Reativar</a>
+        {% endif %}
+      </div>
+    {% endfor %}
+  {% else %}
+      <h1 class="text-muted text-center">Não há usuários.</h1>
+  {% endif %}
+  </div>
+</div>
+
+{% endblock %}
