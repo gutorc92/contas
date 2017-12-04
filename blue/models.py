@@ -6,6 +6,9 @@ class Category(models.Model):
 
     def __str__(self):
         return self.description
+    
+    def get_absolute_url(self):
+        return reverse('category', kwargs={'pk':self.pk})
 
 class StatementType(models.Model):
     description = models.CharField(max_length=100)

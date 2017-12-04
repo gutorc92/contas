@@ -3,7 +3,8 @@ from .models import Category,Statement,StatementType
 from .forms import CategoryForm,StatementForm,StatementTypeForm
 from django.views import View
 # Create your views here.
-
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 
 class StatementView(View):
 
@@ -25,15 +26,22 @@ class StatementView(View):
                 'id_type': id_type,
                 'statements': statements})
 
-def create_category(request):
-    if request.method == 'POST':
-        form = CategoryForm(request.POST)
-        if form.is_valid() and form.save():
-            form = CategoryForm()
-    else:
-        form = CategoryForm()
-    categories = Category.objects.all()
-    return  render(request,"blue/category.html",{'form':form, 'categories': categories})
+
+class CategoryCreate(CreateView):
+    model = Category
+    form_class = CategoryForm
+    template_name  = "category.html"
+    #extra_context['categories'] = Category.objects.all()
+
+class CategoryUpdate(UpdateView):
+    model = Category
+    fields = ['description']
+
+class CategoryDelete(DeleteView):
+    model = Category
+    success_url = reverse_lazy('category')
+
+
 
 def create_statement_type(request):
     if request.method == 'POST':
