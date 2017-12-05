@@ -32,5 +32,9 @@ class Statement(models.Model):
             related_name="statements", 
             on_delete=models.SET_NULL)
 
-
+    def filter_by_range(self, pk_user, month):
+        _, num_days = calendar.monthrange(2017, month)
+        last_day = datetime.date(2017, month, num_days)
+        first_day = datetime.date(2017, month, 1)
+        return Statement.objects.filter(user__pk=pk_user, date__range=[first_day, last_day])
     

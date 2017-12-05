@@ -40,10 +40,8 @@ class LoginView(FormView):
         return redirect("logged")
 
     def get(self, request):
-        print(request)
-        if hasattr(request, 'user') and isinstance(request.user, get_user_model()):
-            if request.user.is_authenticated():
-                logout(request)
+        if request.user.is_authenticated():
+            logout(request)
             return redirect("index")
         else:
             return super(LoginView, self).get(request)
