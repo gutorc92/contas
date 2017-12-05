@@ -7,6 +7,13 @@ class CategoryForm(ModelForm):
         model = Category
         fields = ['description']
 
+    def save(self, user):
+        category = super(CategoryForm, self).save(commit=False)
+        category.save()
+        for fa in user.family.all():
+            c.family.add(fa)
+        category.save()
+
 class StatementTypeForm(ModelForm):
     
     class Meta:
@@ -25,4 +32,7 @@ class StatementForm(ModelForm):
             'categories': Select(),
         }
 
-    
+    def save(self, user):
+        st = super(StatementForm, self).save(commit=False)
+        st.user = user
+        st.save()

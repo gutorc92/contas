@@ -24,8 +24,8 @@
                 <ul class="list-group">
                     {% for category in categories %}
                     <li class="list-group-item">{{ category.description }} 
-                        <a href="#">{% bootstrap_icon "edit" %}</a>
-                        <a href="#">{% bootstrap_icon "trash" %}</a>
+                        <a href="{% url "category-update" pk=category.pk %}">{% bootstrap_icon "edit" %}</a>
+                        <a href="{% url "category-delete" pk=category.pk %}">{% bootstrap_icon "trash" %}</a>
                     </li>
                         
                     {% endfor %}

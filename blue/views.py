@@ -20,18 +20,32 @@ class StatementView(View):
     def post(self, request, id_type):
         form = StatementForm(request.POST)
         statements = Statement.objects.all()
-        if form.is_valid() and form.save():
+        if form.is_valid() and form.save(request.user):
             form = StatementForm(initial={'st_type': id_type})
         return  render(request,"blue/statement.html",{'form':form, 
                 'id_type': id_type,
                 'statements': statements})
 
 
-class CategoryCreate(CreateView):
+class CategoryCreate(View):
     model = Category
     form_class = CategoryForm
     template_name  = "blue/category.html"
-    #extra_context['categories'] = Category.objects.all()
+    
+    def get(self, request):
+        categories = Category.objects.filter(family__members__id=request.user.pk)
+        return  render(request,"blue/category.html",{'form': self.form_class, 
+                'categories': categories })
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.save(request.user)
+            form = self.form_class()
+
+        categories = Category.objects.filter(family__members__id=request.user.pk)
+        return  render(request,"blue/category.html",{'form': self.form_class, 
+                'categories': categories })
 
 class CategoryUpdate(UpdateView):
     model = Category

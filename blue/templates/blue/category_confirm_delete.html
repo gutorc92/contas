@@ -1,0 +1,14 @@
+{% extends 'contas/base.html' %}
+{# Load the tag library #}
+{% load bootstrap3 %}
+{% load i18n %}
+{# Load CSS and JavaScript #}
+{% load static %}
+<h1>{% trans "Category" %}</h1>
+
+{% block content %}
+    <div class="alert alert-success">
+        <strong>{% trans "Success!" %}</strong> 
+        <p>{% trans "Category delete successfully!" %}</p>
+    </div>
+{% endblock %}

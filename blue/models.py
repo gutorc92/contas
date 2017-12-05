@@ -4,7 +4,7 @@ from users.models import Family
 # Create your models here.
 class Category(models.Model):
     description = models.CharField(max_length=200)
-    family = models.ForeignKey(Family, blank=True, null=True, on_delete=models.SET_NULL)
+    family = models.ManyToManyField(Family)
 
     def __str__(self):
         return self.description
