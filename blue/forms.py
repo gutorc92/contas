@@ -11,7 +11,7 @@ class CategoryForm(ModelForm):
         category = super(CategoryForm, self).save(commit=False)
         category.save()
         for fa in user.family.all():
-            c.family.add(fa)
+            category.family.add(fa)
         category.save()
 
 class StatementTypeForm(ModelForm):

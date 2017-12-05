@@ -10,7 +10,7 @@
     <div class="container">
         <div class="row top-row">
             <div class="col-xs-4">
-                <form action="/blue/category/create/" method="post" class="form">
+                <form action="{% url "category" %}" method="post" class="form">
                   {% csrf_token %}
                   {% bootstrap_form form %}
                   {% buttons %}
