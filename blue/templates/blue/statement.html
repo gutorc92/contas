@@ -2,15 +2,15 @@
 {# Load the tag library #}
 {% load bootstrap3 %}
 {% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 {# Load CSS and JavaScript #}
 {% load static %}
 
 {% block content %}
-    <h3>{% trans "Statement" %} {% trans  type_name %}</h3>
+    <h3>{% trans "Statement" %}{{ LANGUAGE_CODE }} {% trans  type_name %}</h3>
     <div class="container">
         <div class="row top-row">
             <div class="col-xs-4">
-
                 <form action="/blue/statement/create/{{ id_type }}/" method="post" class="form">
                   {% csrf_token %}
                   {% for field in form %}
@@ -27,8 +27,8 @@
                         <script type="text/javascript">
                             $(function () {
                                 $('#datetimepicker1').datetimepicker({
-                                    format: 'DD/MM/YYYY',
-                                    locale: 'pt-br',
+                                    format: "MM/DD/YYYY",
+                                    locale: "en",
                                 });
                             });
                         </script>

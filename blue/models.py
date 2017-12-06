@@ -1,6 +1,9 @@
 from django.db import models
+from django.db.models import Sum
 from django.contrib.auth import get_user_model
 from users.models import Family
+import datetime
+import calendar
 # Create your models here.
 class Category(models.Model):
     description = models.CharField(max_length=200)
@@ -12,11 +15,36 @@ class Category(models.Model):
     def get_absolute_url(self):
         return reverse('category', kwargs={'pk':self.pk})
 
+    
+class StatementTypeManager(models.Manager):
+
+    def filter_by_range(self, pk_user, month = None, year=None):
+        month = month if month is not None else datetime.date.today().month
+        year = year if year is not None else datetime.date.today().year
+        _, num_days = calendar.monthrange(year, month)
+        last_day = datetime.date(year, month, num_days)
+        first_day = datetime.date(year, month, 1)
+        return self.get_queryset().filter(statements__user__pk=pk_user, 
+                statements__date__range=[first_day, last_day])
+
+    def sum_by_range(self, pk_user, month=None, year=None):
+        return self.filter_by_range(pk_user, month, year).annotate(total=Sum("statements__value"))
+ 
 class StatementType(models.Model):
     description = models.CharField(max_length=100)
+
+    objects = StatementTypeManager()
     
     def __str__(self):
         return self.description
+
+    def get_color(self):
+        if "Outcome" in self.description:
+            return "#ff0000"
+        elif "Income" in self.description:
+            return "#33cc33"
+   
+        
 
 class Statement(models.Model):
     description = models.CharField(max_length=200)
@@ -32,9 +60,3 @@ class Statement(models.Model):
             related_name="statements", 
             on_delete=models.SET_NULL)
 
-    def filter_by_range(self, pk_user, month):
-        _, num_days = calendar.monthrange(2017, month)
-        last_day = datetime.date(2017, month, num_days)
-        first_day = datetime.date(2017, month, 1)
-        return Statement.objects.filter(user__pk=pk_user, date__range=[first_day, last_day])
-    

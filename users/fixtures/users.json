@@ -3,16 +3,14 @@
     "model": "users.Family",
     "pk": 1,
     "fields": {
-      "name": "Cavalcante",
-      "members": [1]
+      "name": "Cavalcante"
     }
   },
   {
     "model": "users.Family",
     "pk": 2,
     "fields": {
-      "name": "Silva",
-      "members": [2, 3]
+      "name": "Silva"
     }
   },
   {
@@ -47,5 +45,56 @@
       "password": "pbkdf2_sha256$36000$4a3GGwU251C6$EFJl6PCnvbJ9AERZDAkFt/f+xf/UskGPZY7DcGs5Thc=",
       "groups": [3]
     }
+  },
+  {
+    "model": "users.BlueUser",
+    "pk": 4,
+    "fields": {
+      "first_name": "Luiz",
+      "last_name": "Pereira Silva",
+      "email": "luiz@gmail.com",
+      "password": "pbkdf2_sha256$36000$4a3GGwU251C6$EFJl6PCnvbJ9AERZDAkFt/f+xf/UskGPZY7DcGs5Thc=",
+      "groups": [3]
+    }
+  },
+  {
+    "model": "users.FamilyRelationship",
+    "pk": 1,
+    "fields": {
+      "user": "1",
+      "family": "1",
+      "status": "1"
+    }
+  },
+  {
+    "model": "users.FamilyRelationship",
+    "pk": 2,
+    "fields": {
+      "user": "2",
+      "family": "2",
+      "status": "1"
+    }
+  },
+  {
+    "model": "users.FamilyRelationship",
+    "pk": 3,
+    "fields": {
+      "user": "3",
+      "family": "2",
+      "status": "1"
+    }
+  },
+  {
+    "model": "users.FamilyRelationship",
+    "pk": 4,
+    "fields": {
+      "user": "4",
+      "family": "2",
+      "status": "2"
+    }
   }
+
+
+
+
 ]

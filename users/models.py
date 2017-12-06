@@ -3,6 +3,7 @@ from django.contrib.auth.base_user import AbstractBaseUser,BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
+from django.contrib.auth import get_user_model
 
 
 class UserManager(BaseUserManager):
@@ -97,4 +98,14 @@ class BlueUser(AbstractBaseUser, PermissionsMixin):
 
 class Family(models.Model):
     name = models.CharField(max_length=100)
-    members = models.ManyToManyField(BlueUser, related_name="family")
+    members = models.ManyToManyField(get_user_model(), through='FamilyRelationship', related_name="family")
+
+class FamilyRelationship(models.Model):
+     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+     family = models.ForeignKey(Family, on_delete=models.CASCADE)
+     STATUS_CHOICES = (
+        ("1", _('Member')),
+        ("2", _('Invited')),
+        ("3", _('First')),
+     )
+     status = models.CharField(max_length=1, choices=STATUS_CHOICES)

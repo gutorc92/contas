@@ -41,6 +41,10 @@
         <script type="text/javascript" src="{% static "static/js/bootstrap.min.js" %}"></script>
         <script type="text/javascript" src="{% static "static/js/moment-with-locales.js" %}"></script>
 
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        {% block extrajs %}
+            {{ extrajs }}
+        {% endblock %}
     </head>
     <body>
         <div id="menu">
@@ -66,7 +70,7 @@
                 <a href="{% url "statement" id_type=2 %}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-book fa-fw"></i>{% trans "Income" %}</a>
                 <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-book fa-fw"></i>{% trans "Transations" %}</a>
                 <a href="{% url "category" %}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-book fa-fw"></i>{% trans "Categories" %}</a>
-                <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-book fa-fw"></i>{% trans "Family" %}</a>
+                <a href="{% url "family-list" %}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-book fa-fw"></i>{% trans "Family" %}</a>
                 <a href="{% url "logout" %}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-book fa-fw"></i>{% trans "Logout" %}</a>
              </div>
         </nav>

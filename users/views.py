@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import SigninForm, LoginForm
+from .forms import SigninForm, LoginForm, InvitationForm
 from django.views.generic.edit import FormView
 from django.contrib.auth import authenticate
 from django.contrib.auth import login, logout
@@ -10,6 +10,7 @@ from django.utils.decorators import method_decorator
 from contas.decorators import required_to_be_admin, required_to_be_student
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
+from .models import FamilyRelationship
 # Create your views here.
 
 
@@ -104,3 +105,37 @@ class UserChangeGroupView(View):
             messages.success(request, u'Perfil trocado com sucesso!')
 
         return redirect("list_users")
+
+class FamilyView(View):
+    
+    def get(self, request):
+        family_list = request.user.family.all()
+        return render(request, 'users/users_family.html', 
+                {'family_list': family_list,
+                 'form': InvitationForm()})
+
+    def post(self, request):
+        form = InvitationForm(request.POST)
+        if form.is_valid() and form.save():
+            form = InvitationForm()
+        family_list = request.user.family.all()
+        return render(request, 'users/users_family.html', 
+                {'family_list': family_list,
+                 'form': form})
+class FamilyAcceptView(View):
+        
+    def get(self, request, id_invitation):
+        if FamilyRelationship.objects.filter(pk=id_invitation).exists():
+            fr = FamilyRelationship.objects.get(pk=id_invitation)
+            if fr.user.pk == request.user.pk:
+                fr.status = "1"
+                fr.save()
+                for frp in FamilyRelationship.objects.filter(user=request.user, status=3):
+                    frp.delete()
+                return redirect("family-list")
+            else:
+                return redirect("index")
+        else:
+            redirect("index")
+
+

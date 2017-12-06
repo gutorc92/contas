@@ -10,10 +10,12 @@ from django.shortcuts import redirect
 class DashBoard(View):
 
     def get(self, request):
-        income = 40
-        outcome = 50
+        result = StatementType.objects.sum_by_range(request.user.pk)
+        result_list = ()
+        for st in result:
+            result_list = result_list + ((st.description, st.total, st.get_color()),)
         return render(request, "blue/dashboard.html",{
-                "values": [['Income', income], ['Outcome', outcome]]})
+                "list_st": result_list})
 
 class StatementView(View):
 

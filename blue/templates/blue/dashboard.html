@@ -7,26 +7,37 @@
 <h1>{% trans "Category" %}</h1>
 
 {% block content %}
-   {% load googlecharts %}
-    {# container #}
-    <div id="out"></div>
-    {% googlecharts %}
-        {# named data and options can be reused #}
-        {% data values "out_data" %}
-            {% col "string" "Name" %}"{{ val }}"{% endcol %}
-            {% col "number" "Value" %}{{ val }}{% endcol %}
-        {% enddata %}
-        {# you can also use global javascript variables here, #}
-        {# and call functions #}
-        {% options "out_options" %}
-            kind: "ColumnChart",
-            options: {
-                width: 300,
-                height: 240,
-                title: "Income x Outcome"
-            }
-        {% endoptions %}
-        {# chart is assembled from container, data and options #}
-        {% graph "out" "out_data" "out_options" %}
-    {% endgooglecharts %}     
+      <script type="text/javascript">
+        google.charts.load("current", {packages:['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+          var data = google.visualization.arrayToDataTable([
+            ["Element", "Density", { role: "style" } ],
+              {% for d, t, c in list_st %}
+              ["{{d}}", {{t}}, "{{c}}"],
+              {% endfor %}
+          ]);
+
+          var view = new google.visualization.DataView(data);
+          view.setColumns([0, 1,
+                           { calc: "stringify",
+                             sourceColumn: 1,
+                             type: "string",
+                             role: "annotation" },
+                           2]);
+
+          var options = {
+            title: "Income x Outcome",
+            width: 600,
+            height: 400,
+            bar: {groupWidth: "50%"},
+            legend: { position: "none" },
+            titleTextStyle: {
+                    fontSize: 25},
+          };
+          var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+          chart.draw(view, options);
+      }
+      </script>
+    <div id="columnchart_values" style="width: 900px; height: 300px;"></div>
 {% endblock %}
