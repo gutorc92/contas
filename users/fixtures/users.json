@@ -1,6 +1,22 @@
 [
   {
-    "model": "users.BrainUser",
+    "model": "users.Family",
+    "pk": 1,
+    "fields": {
+      "name": "Cavalcante",
+      "members": [1]
+    }
+  },
+  {
+    "model": "users.Family",
+    "pk": 2,
+    "fields": {
+      "name": "Silva",
+      "members": [2, 3]
+    }
+  },
+  {
+    "model": "users.BlueUser",
     "pk": 1,
     "fields": {
       "first_name": "Pedro",
@@ -11,7 +27,7 @@
     }
   },
   {
-    "model": "users.BrainUser",
+    "model": "users.BlueUser",
     "pk": 2,
     "fields": {
       "first_name": "Alberto",
@@ -22,11 +38,11 @@
     }
   },
   {
-    "model": "users.BrainUser",
+    "model": "users.BlueUser",
     "pk": 3,
     "fields": {
       "first_name": "Carlos",
-      "last_name": "Pereira",
+      "last_name": "Pereira Silva",
       "email": "carlos@gmail.com",
       "password": "pbkdf2_sha256$36000$4a3GGwU251C6$EFJl6PCnvbJ9AERZDAkFt/f+xf/UskGPZY7DcGs5Thc=",
       "groups": [3]

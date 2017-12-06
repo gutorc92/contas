@@ -3,28 +3,50 @@
     "model": "blue.category",
     "pk": 1,
     "fields": {
-      "description": "Aluguel"
+      "description": "Rent",
+      "family": [1]
     }
   },
   {
     "model": "blue.category",
     "pk": 2,
     "fields": {
-      "description": "Academia"
+      "description": "Gym",
+      "family": [1]
+    }
+  },
+  {
+    "model": "blue.category",
+    "pk": 3,
+    "fields": {
+      "description": "Food",
+      "family": [2]
     }
   },
   {
     "model": "blue.StatementType",
     "pk": 1,
     "fields": {
-      "description": "Debit"
+      "description": "Outcome"
     }
   },
   {
     "model": "blue.StatementType",
     "pk": 2,
     "fields": {
-      "description": "Credit"
+      "description": "Income"
+    }
+  },
+  {
+    "model": "blue.Statement",
+    "pk": 1,
+    "fields": {
+      "description": "Burger King",
+      "value": 40.32,
+      "date": "2017-12-21",
+      "categories": 3,
+      "st_type": 1,
+      "user": 2
     }
   }
 ]

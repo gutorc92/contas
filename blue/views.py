@@ -5,17 +5,28 @@ from django.views import View
 # Create your views here.
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.shortcuts import redirect
+
+class DashBoard(View):
+
+    def get(self, request):
+        income = 40
+        outcome = 50
+        return render(request, "blue/dashboard.html",{
+                "values": [['Income', income], ['Outcome', outcome]]})
 
 class StatementView(View):
 
     def get(self, request, id_type):
         if StatementType.objects.filter(id=id_type).exists():
-            statements = Statement.objects.all()
+            statements = Statement.objects.filter(st_type__pk=id_type)
             form = StatementForm(initial={'st_type': id_type})
             return  render(request,"blue/statement.html",{'form':form, 
                 'id_type': id_type,
+                'type_name': StatementType.objects.get(id=id_type).description,
                 'statements': statements})
-
+        else:
+            return redirect("index")
 
     def post(self, request, id_type):
         form = StatementForm(request.POST)

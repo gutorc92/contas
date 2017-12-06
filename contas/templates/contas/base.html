@@ -61,7 +61,7 @@
 
               <div class="w3-bar-block">
                 <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-                <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-dashboard fa-fw"></i>  Dashboard</a>
+                <a href="{% url "dashboard" %}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-dashboard fa-fw"></i>  Dashboard</a>
                 <a href="{% url "statement" id_type=1 %}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>{% trans "Outcome" %}</a>
                 <a href="{% url "statement" id_type=2 %}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-book fa-fw"></i>{% trans "Income" %}</a>
                 <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-book fa-fw"></i>{% trans "Transations" %}</a>

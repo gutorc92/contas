@@ -4,44 +4,62 @@
 {% load i18n %}
 {# Load CSS and JavaScript #}
 {% load static %}
-<h1>{% trans "Statement" %}</h1>
 
 {% block content %}
-<form action="/blue/statement/create/{{ id_type }}/" method="post" class="form">
-  {% csrf_token %}
-  {% for field in form %}
-	{% if field.name == 'date' %}
-		<div class="form-group">
-				{% bootstrap_label field.label %}
-			<div class='input-group date' id='datetimepicker1'>
-				{% bootstrap_field field show_label=false%}
-			<span class="input-group-addon">
-				<span class="glyphicon glyphicon-calendar"></span>
-			</span>
-			</div>
-		</div>
-		<script type="text/javascript">
-            $(function () {
-                $('#datetimepicker1').datetimepicker({
-                    format: 'DD/MM/YYYY',
-                    locale: 'pt-br',
-                });
-            });
-        </script>
-	{% else %}
-		{% bootstrap_field field %}
-	{% endif %}
-  {% endfor %}
-  {% buttons %}
-    <button type="submit" class="btn btn-primary">
-      {% bootstrap_icon "star" %} Submit
-    </button>
-  {% endbuttons %}
-</form>
+    <h3>{% trans "Statement" %} {% trans  type_name %}</h3>
+    <div class="container">
+        <div class="row top-row">
+            <div class="col-xs-4">
 
-<ul class="list-group">
-{% for statement in statements %}
-<li class="list-group-item">{{ statement.description }}</li>
-{% endfor %}
-</ul>
+                <form action="/blue/statement/create/{{ id_type }}/" method="post" class="form">
+                  {% csrf_token %}
+                  {% for field in form %}
+                    {% if field.name == 'date' %}
+                        <div class="form-group">
+                                {% bootstrap_label field.label %}
+                            <div class='input-group date' id='datetimepicker1'>
+                                {% bootstrap_field field show_label=false%}
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                            $(function () {
+                                $('#datetimepicker1').datetimepicker({
+                                    format: 'DD/MM/YYYY',
+                                    locale: 'pt-br',
+                                });
+                            });
+                        </script>
+                    {% else %}
+                        {% bootstrap_field field %}
+                    {% endif %}
+                  {% endfor %}
+                  {% buttons %}
+                    <button type="submit" class="btn btn-primary">
+                      {% bootstrap_icon "star" %} Submit
+                    </button>
+                  {% endbuttons %}
+                </form>
+            </div>
+            <div class="col-xs-4">
+                <ul class="list-group">
+                    {% for statement in statements %}
+                        <li class="list-group-item">
+                            {{ statement.description }}
+                            {{ statement.value }}
+                            {{ statement.date }}
+                            <a href="{% url "statement-update" pk=statement.pk %}">
+                                {% bootstrap_icon "edit" %}
+                            </a>
+                            <a href="{% url "statement-delete" pk=statement.pk %}">
+                                {% bootstrap_icon "trash" %}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
 {% endblock %}

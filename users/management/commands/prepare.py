@@ -49,6 +49,7 @@ class Command(BaseCommand):
 
         self.exclude_migrations()
         call_command('migrate')
+        call_command('loaddata',  "users")
         call_command('loaddata',  "initial")
 
         

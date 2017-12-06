@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'blue',
     'bootstrap3',
     'django_extensions',
+    'googlecharts',
 ]
 
 MIDDLEWARE = [
