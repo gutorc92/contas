@@ -21,8 +21,10 @@ class StatementView(View):
 
     def get(self, request, id_type):
         if StatementType.objects.filter(id=id_type).exists():
-            statements = Statement.objects.filter(st_type__pk=id_type)
-            form = StatementForm(initial={'st_type': id_type})
+            statements = Statement.objects.filter(st_type__pk=id_type, 
+                    user__id = request.user.pk)
+            categories = Category.objects.filter(family__members__id=request.user.pk)
+            form = StatementForm(initial={'st_type': id_type, 'categories': categories})
             return  render(request,"blue/statement.html",{'form':form, 
                 'id_type': id_type,
                 'type_name': StatementType.objects.get(id=id_type).description,
@@ -32,9 +34,11 @@ class StatementView(View):
 
     def post(self, request, id_type):
         form = StatementForm(request.POST)
-        statements = Statement.objects.all()
+        statements = Statement.objects.filter(st_type__pk=id_type, 
+                    user__id = request.user.pk)
+        categories = Category.objects.filter(family__members__id=request.user.pk)
         if form.is_valid() and form.save(request.user):
-            form = StatementForm(initial={'st_type': id_type})
+            form = StatementForm(initial={'st_type': id_type, 'categories': categories})
         return  render(request,"blue/statement.html",{'form':form, 
                 'id_type': id_type,
                 'statements': statements})

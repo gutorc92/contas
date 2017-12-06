@@ -32,7 +32,15 @@ class StatementForm(ModelForm):
             'categories': Select(),
         }
 
+    def __init__(self, *args, **kwargs):
+        if 'initial' in kwargs:
+            self.categories = kwargs['initial']['categories'] if 'categories' in kwargs['initial'] else None
+        super(StatementForm, self).__init__(*args, **kwargs)
+        if self.categories:
+            self.fields['categories'].queryset = self.categories
+
     def save(self, user):
         st = super(StatementForm, self).save(commit=False)
         st.user = user
         st.save()
+        return True
