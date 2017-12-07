@@ -1,14 +1,14 @@
 {% extends 'contas/base.html' %}
 
 {% load staticfiles bootstrap3 %}
-
+{% load i18n %} 
 {% block extrastyle %}
   <link rel="stylesheet" type="text/css" href="{% static "styles/signin.css" %}" >
 {% endblock %}
 
 {% block content %}
 
-<h3 class="text-center">Login</h3>
+<h3 class="text-center">{% trans "Login" %}</h3>
 <hr class="star-light">
 <div class="form-content">
   {% if messages %}

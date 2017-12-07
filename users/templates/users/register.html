@@ -2,14 +2,14 @@
 
 {% load staticfiles bootstrap3 %}
 {% bootstrap_javascript jquery=1 %}
-
+{% load i18n %}
 {% block extrastyle %}
   <link rel="stylesheet" type="text/css" href="{% static "styles/signin.css" %}" >
 {% endblock %}
 
 {% block content %}
 
-<h3>CADASTRO</h3>
+<h3>{% trans "Register" %}</h3>
 <div class="form-content" style="clear: both">
   {% bootstrap_messages %}
   <form class="form-horizontal text-left" action="{% url "signin" %}" method = 'POST'>

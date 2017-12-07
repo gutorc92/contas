@@ -51,7 +51,7 @@ class LoginForm(forms.Form):
         error_messages={'invalid': _('Email address must \
                                        be in a valid format.')})
     password = forms.CharField(
-        label=_('Senha:'),
+        label=_('Password:'),
         required=True,
         widget=forms.PasswordInput(attrs={'placeholder': ''}))
 
@@ -64,16 +64,16 @@ class LoginForm(forms.Form):
 
 
 class SigninForm(forms.Form):
-    name = forms.CharField(label='Nome completo',
+    name = forms.CharField(label=_('Complete Name'),
         required=True) 
     email = forms.CharField(label='Email',
         required=True)
-    password = forms.CharField(label='Senha',
+    password = forms.CharField(label=_('Password'),
         required=True,
-        widget=forms.PasswordInput(attrs={'placeholder': 'Confirme '}))
-    password_confirm = forms.CharField(label='Senha',
+        widget=forms.PasswordInput(attrs={'placeholder': _('Your password ')}))
+    password_confirm = forms.CharField(label=_('Password Confirm'),
         required=True,
-        widget=forms.PasswordInput(attrs={'placeholder': 'Confirme sua senha '}))
+        widget=forms.PasswordInput(attrs={'placeholder': _('Confirm your password')}))
     
     
 
