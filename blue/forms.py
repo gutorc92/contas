@@ -36,7 +36,7 @@ class StatementForm(ModelForm):
         if 'initial' in kwargs:
             self.categories = kwargs['initial']['categories'] if 'categories' in kwargs['initial'] else None
         super(StatementForm, self).__init__(*args, **kwargs)
-        if self.categories:
+        if hasattr(self, 'categories'):
             self.fields['categories'].queryset = self.categories
 
     def save(self, user):

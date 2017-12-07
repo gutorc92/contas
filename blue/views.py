@@ -11,11 +11,13 @@ class DashBoard(View):
 
     def get(self, request):
         result = StatementType.objects.sum_by_range(request.user.pk)
+        result_category = Category.objects.sum_by_range(request.user.pk, 1).values_list('description', 'total')
         result_list = ()
         for st in result:
             result_list = result_list + ((st.description, st.total, st.get_color()),)
         return render(request, "blue/dashboard.html",{
-                "list_st": result_list})
+                "list_st": result_list,
+                "list_ct": result_category})
 
 class StatementView(View):
 
