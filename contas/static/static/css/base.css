@@ -1,0 +1,55 @@
+html, body {
+  height: 100%;
+}
+
+.content-wrapper {
+  margin-top: 100px;
+  margin-bottom: 20px;
+  min-height: 100%;
+}
+
+.navbar-brand {
+  margin-top: -10px;
+}
+
+.footer-social {
+  list-style: none;
+ }
+
+footer {
+position: relative;
+height: 50px;
+clear: both;
+padding: 20px;
+margin-top: 20px;
+}
+
+.section-title.center {
+  padding: 30px 0;
+}
+
+.line {
+  border-top: 4px solid #234aff;
+  height: 10px;
+  width: 60px;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.line hr {
+  border-top: 4px solid rgba(252, 172, 69, 0.34);
+  display: block;
+  float: left;
+  clear: both;
+  width: 40px;
+  text-align: center;
+  margin-top: 10px;
+  position: relative;
+  left: 17%;
+}
+
+.top-row {
+    margin-top: 12px;
+}
+
