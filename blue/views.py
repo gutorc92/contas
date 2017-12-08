@@ -1,14 +1,18 @@
 from django.shortcuts import render
+from django.urls import reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Category,Statement,StatementType
 from .forms import CategoryForm,StatementForm,StatementTypeForm
 from django.views import View
-# Create your views here.
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
 import datetime
 
-class DashBoard(View):
+class DashBoard(LoginRequiredMixin, View):
+
+    login_url = "/users/login"
+    redirect_field_name = 'redirect_to'
 
     def get(self, request):
         result = StatementType.objects.sum_by_range(request.user.pk)
@@ -21,14 +25,20 @@ class DashBoard(View):
                 "list_st": result_list,
                 "list_ct": result_category})
 
-class StatementListView(View):
+class StatementListView(LoginRequiredMixin, View):
+
+    login_url = "/users/login"
+    redirect_field_name = 'redirect_to'
 
     def get(self, request):
         statements = Statement.objects.filter(user__id = request.user.pk).order_by('-date')
         return  render(request,"blue/statement_list.html",{ 
             'statements': statements})
         
-class StatementView(View):
+class StatementView(LoginRequiredMixin, View):
+
+    login_url = "/users/login"
+    redirect_field_name = 'redirect_to'
 
     def get(self, request, id_type):
         if StatementType.objects.filter(id=id_type).exists():
@@ -55,7 +65,10 @@ class StatementView(View):
                 'statements': statements})
 
 
-class CategoryCreate(View):
+class CategoryCreate(LoginRequiredMixin, View):
+
+    login_url = "/users/login"
+    redirect_field_name = 'redirect_to'
     model = Category
     form_class = CategoryForm
     template_name  = "blue/category.html"
@@ -75,11 +88,16 @@ class CategoryCreate(View):
         return  render(request,"blue/category.html",{'form': self.form_class, 
                 'categories': categories })
 
-class CategoryUpdate(UpdateView):
+class CategoryUpdate(LoginRequiredMixin, UpdateView):
+    login_url = "/users/login"
+    redirect_field_name = 'redirect_to'
     model = Category
     fields = ['description']
 
-class CategoryDelete(DeleteView):
+class CategoryDelete(LoginRequiredMixin, DeleteView):
+    login_url = "/users/login"
+    redirect_field_name = 'redirect_to'
+
     model = Category
     success_url = reverse_lazy('category')
 

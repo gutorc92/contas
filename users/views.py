@@ -3,6 +3,7 @@ from .forms import SigninForm, LoginForm, InvitationForm
 from django.views.generic.edit import FormView
 from django.contrib.auth import authenticate
 from django.contrib.auth import login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.views import View
 from django.contrib import messages
@@ -106,8 +107,11 @@ class UserChangeGroupView(View):
 
         return redirect("list_users")
 
-class FamilyView(View):
-    
+class FamilyView(LoginRequiredMixin, View):
+
+    login_url = "/users/login"
+    redirect_field_name = 'redirect_to'
+
     def get(self, request):
         family_list = request.user.family.all()
         return render(request, 'users/users_family.html', 
@@ -122,8 +126,12 @@ class FamilyView(View):
         return render(request, 'users/users_family.html', 
                 {'family_list': family_list,
                  'form': form})
-class FamilyAcceptView(View):
-        
+
+class FamilyAcceptView(LoginRequiredMixin, View):
+
+    login_url = "/users/login"
+    redirect_field_name = 'redirect_to'       
+
     def get(self, request, id_invitation):
         if FamilyRelationship.objects.filter(pk=id_invitation).exists():
             fr = FamilyRelationship.objects.get(pk=id_invitation)
