@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-08 18:05+0000\n"
+"POT-Creation-Date: 2017-12-08 19:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,7 +34,7 @@ msgstr "Valor"
 msgid "Date"
 msgstr "Data"
 
-#: blue/templates/blue/bk.html:12 blue/templates/blue/category.html:7
+#: blue/templates/blue/category.html:7
 #: blue/templates/blue/category_confirm_delete.html:7
 #: blue/templates/blue/category_form.html:7
 #: users/templates/users/users_family.html:23
@@ -65,9 +65,14 @@ msgstr "Quadro Resumo"
 msgid "Statement"
 msgstr "Transação"
 
-#: blue/templates/blue/statement.html:41
+#: blue/templates/blue/statement.html:48
 msgid "Submit"
 msgstr "Submeter"
+
+#: blue/templates/blue/statement_list.html:11
+#, fuzzy
+msgid "Statements"
+msgstr "Transação"
 
 #: blue/templates/blue/statement_type.html:12
 msgid "Type of Statement"

@@ -21,6 +21,13 @@ class DashBoard(View):
                 "list_st": result_list,
                 "list_ct": result_category})
 
+class StatementListView(View):
+
+    def get(self, request):
+        statements = Statement.objects.filter(user__id = request.user.pk).order_by('-date')
+        return  render(request,"blue/statement_list.html",{ 
+            'statements': statements})
+        
 class StatementView(View):
 
     def get(self, request, id_type):

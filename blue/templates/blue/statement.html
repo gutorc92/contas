@@ -7,7 +7,7 @@
 {% load static %}
 
 {% block content %}
-    <h3>{% trans "Statement" %} {% trans  type_name %}</h3>
+<h3>{% trans "Statement" %}{{LANGUAGE_CODE}} {% trans  type_name %}</h3>
     <div class="container">
         <div class="row top-row">
             <div class="col-xs-4">
@@ -27,8 +27,15 @@
                         <script type="text/javascript">
                             $(function () {
                                 $('#datetimepicker1').datetimepicker({
-                                    format: "MM/DD/YYYY",
-                                    locale: "en",
+                                    {% if LANGUAGE_CODE %}
+                                        {% language 'pt-br' %}
+                                            format: "DD/MM/YYYY",
+                                            locale: "pt-br",
+                                        {% endlanguage %}
+                                    {% else %}
+                                        format: "MM/DD/YYYY",
+                                        locale: "en",
+                                    {% endif %}
                                 });
                             });
                         </script>

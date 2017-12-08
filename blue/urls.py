@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from .views import StatementView, DashBoard
+from .views import StatementView, StatementListView, DashBoard
 from .views import create_statement_type 
 from .views import CategoryCreate, CategoryUpdate, CategoryDelete
 
@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^statement/create/(?P<id_type>\d+)/$',StatementView.as_view(),name='statement'),
     url(r'^statement/update/(?P<pk>\d+)/$',StatementView.as_view(),name='statement-update'),
     url(r'^statement/delete/(?P<pk>\d+)/$',StatementView.as_view(),name='statement-delete'),
+    url(r'^statement/list/$',StatementListView.as_view(),name='statement-list'),
     url(r'^statement_type/create/$',create_statement_type,name='statement_type'),
 
 ]

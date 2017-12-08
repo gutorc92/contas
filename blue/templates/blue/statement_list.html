@@ -1,0 +1,33 @@
+{% extends 'contas/base.html' %}
+{# Load the tag library #}
+{% load bootstrap3 %}
+{% load bluetags %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{# Load CSS and JavaScript #}
+{% load static %}
+
+{% block content %}
+<h3>{% trans "Statements" %}</h3>
+    <div class="container">
+        <div class="row top-row">
+            <div class="col-xs-10">
+                <ul class="list-group">
+                    {% for statement in statements %}
+                    <li class="list-group-item {{ statement|stformat }}">
+                            {{ statement.description }}
+                            {{ statement.value| vlformat }}
+                            {{ statement.date }}
+                            <a href="{% url "statement-update" pk=statement.pk %}">
+                                {% bootstrap_icon "edit" %}
+                            </a>
+                            <a href="{% url "statement-delete" pk=statement.pk %}">
+                                {% bootstrap_icon "trash" %}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
