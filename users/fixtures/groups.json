@@ -3,7 +3,7 @@
     "model": "auth.Group",
     "pk": 1,
     "fields": {
-      "name": "student"
+      "name": "normal"
     }
   },
   {
@@ -17,7 +17,7 @@
     "model": "auth.Group",
     "pk": 3,
     "fields": {
-      "name": "professor"
+      "name": "users"
     }
   }
 ]
