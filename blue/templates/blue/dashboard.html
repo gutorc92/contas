@@ -1,10 +1,10 @@
 {% extends 'contas/base.html' %}
 {# Load the tag library #}
 {% load bootstrap3 %}
+{% load l10n %}
 {% load i18n %}
 {# Load CSS and JavaScript #}
 {% load static %}
-<h1>{% trans "Category" %}</h1>
 
 {% block content %}
       <script type="text/javascript">
@@ -14,7 +14,7 @@
           var data = google.visualization.arrayToDataTable([
             ["Element", "Density", { role: "style" } ],
               {% for d, t, c in list_st %}
-              ["{{d}}", {{t}}, "{{c}}"],
+              ["{{d}}", {{t|unlocalize }}, "{{c}}"],
               {% endfor %}
           ]);
 
@@ -27,7 +27,7 @@
                            2]);
 
           var options = {
-            title: "Income x Outcome",
+            title: "{% trans "Income x Outome" %}",
             width: 500,
             height: 300,
             bar: {groupWidth: "50%"},
@@ -38,31 +38,8 @@
           var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
           chart.draw(view, options);
       }
-      </script>
-      <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Sales', 'Expenses'],
-          ['2004',  1000,      400],
-          ['2005',  1170,      460],
-          ['2006',  660,       1120],
-          ['2007',  1030,      540]
-        ]);
-
-        var options = {
-          title: 'Company Performance',
-          curveType: 'function',
-          legend: { position: 'bottom' }
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
-        chart.draw(data, options);
-      }
     </script>
+      
     <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawPieChart);
@@ -72,12 +49,16 @@
         var data = google.visualization.arrayToDataTable([
           ['Category', 'Value'],
           {% for d, t in list_ct %}
-              ["{{d}}", {{t}}],
+              ["{{d}}", {{t|unlocalize}}],
           {% endfor %}
         ]);
 
         var options = {
-          title: 'Outcome by Category'
+            title: '"{% trans "Outcome by Category" %}"',
+            width: 500,
+            height: 300,
+            titleTextStyle: {
+                    fontSize: 25},
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -85,6 +66,8 @@
         chart.draw(data, options);
       }
     </script>
+
+    <h2>{% trans "Dashboard " %}{% trans month %}</h2>
     <div class="container">
         <div class="row top-row">
             <div class="col-xs-5">

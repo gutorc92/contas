@@ -6,6 +6,7 @@ from django.views import View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
+import datetime
 
 class DashBoard(View):
 
@@ -16,6 +17,7 @@ class DashBoard(View):
         for st in result:
             result_list = result_list + ((st.description, st.total, st.get_color()),)
         return render(request, "blue/dashboard.html",{
+                "month" : datetime.datetime.now().strftime("%B"),
                 "list_st": result_list,
                 "list_ct": result_category})
 
