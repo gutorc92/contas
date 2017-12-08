@@ -1,0 +1,47 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-08 11:39+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: contas/templates/contas/base.html:58
+msgid "Welcome"
+msgstr "Bem vindo"
+
+#: contas/templates/contas/base.html:69
+msgid "Outcome"
+msgstr "Despesa"
+
+#: contas/templates/contas/base.html:70
+msgid "Income"
+msgstr "Receita"
+
+#: contas/templates/contas/base.html:71
+msgid "Transations"
+msgstr "Transações"
+
+#: contas/templates/contas/base.html:72
+msgid "Categories"
+msgstr "Categorias"
+
+#: contas/templates/contas/base.html:73
+msgid "Family"
+msgstr "Famílias"
+
+#: contas/templates/contas/base.html:74
+msgid "Logout"
+msgstr "Sair"

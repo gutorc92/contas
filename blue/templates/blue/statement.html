@@ -7,7 +7,7 @@
 {% load static %}
 
 {% block content %}
-    <h3>{% trans "Statement" %}{{ LANGUAGE_CODE }} {% trans  type_name %}</h3>
+    <h3>{% trans "Statement" %} {% trans  type_name %}</h3>
     <div class="container">
         <div class="row top-row">
             <div class="col-xs-4">
@@ -38,7 +38,7 @@
                   {% endfor %}
                   {% buttons %}
                     <button type="submit" class="btn btn-primary">
-                      {% bootstrap_icon "star" %} Submit
+                        {% bootstrap_icon "star" %} {% trans "Submit" %}
                     </button>
                   {% endbuttons %}
                 </form>

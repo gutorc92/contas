@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models import Sum
 from django.contrib.auth import get_user_model
+from django.utils.translation import gettext_lazy as _
 from users.models import Family
 import datetime
 import calendar
@@ -22,7 +23,7 @@ class CategoryManager(models.Manager):
         return self.filter_by_range(pk_user, st_type, month, year).annotate(total=Sum("statements__value"))
 
 class Category(models.Model):
-    description = models.CharField(max_length=200)
+    description = models.CharField(_("description"), max_length=200)
     family = models.ManyToManyField(Family)
     objects = CategoryManager()
 
@@ -48,7 +49,7 @@ class StatementTypeManager(models.Manager):
         return self.filter_by_range(pk_user, month, year).annotate(total=Sum("statements__value"))
  
 class StatementType(models.Model):
-    description = models.CharField(max_length=100)
+    description = models.CharField(_("description"), max_length=100)
 
     objects = StatementTypeManager()
     
@@ -64,9 +65,9 @@ class StatementType(models.Model):
         
 
 class Statement(models.Model):
-    description = models.CharField(max_length=200)
-    value = models.DecimalField(max_digits=20,decimal_places=2)
-    date = models.DateField()   
+    description = models.CharField(_("Description"), max_length=200)
+    value = models.DecimalField(_("Value"), max_digits=20,decimal_places=2)
+    date = models.DateField(_("Date"))   
     categories = models.ForeignKey(Category,blank=True, null=True,
             related_name='statements', 
             on_delete=models.SET_NULL)
